@@ -34,7 +34,7 @@ class EXJOBB_API UGrabbingGesture : public UBlueprintFunctionLibrary
 		static FString DoesGestureExist(UPoseableMeshComponent* hand, TArray<FVector> WhatGesture);
 
 	UFUNCTION(BlueprintCallable, Category = "Hand Tracking Category")
-		static FString DoActionOrNot(FString Gesture, bool& IsPoint, bool& IsPalmOpen);
+		static FString DoActionOrNot(FString Gesture, bool& IsPointLeft, bool& IsPalmOpenLeft, bool& IsPointRight, bool& IsPalmOpenRight, bool leftHand, bool rightHand);
 
 };
 

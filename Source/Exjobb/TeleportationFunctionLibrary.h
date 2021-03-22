@@ -16,6 +16,9 @@ class EXJOBB_API UTeleportationFunctionLibrary : public UBlueprintFunctionLibrar
 	GENERATED_BODY()
 
 		UFUNCTION(BlueprintCallable, Category = "Hand Tracking Category")
-		static FRotator FindPointingVector(UPoseableMeshComponent* leftHand, UPoseableMeshComponent* rightHand);
+		static FRotator FindPointingVector(UPoseableMeshComponent* leftHand, UPoseableMeshComponent* rightHand, bool isLeftHand, bool isRightHand);
+		
+		UFUNCTION(BlueprintCallable, Category = "Hand Tracking Category")
+		static FVector FindUsedHand(UPoseableMeshComponent* leftHand, UPoseableMeshComponent* rightHand, bool isLeftHand, bool isRightHand);
 
 };

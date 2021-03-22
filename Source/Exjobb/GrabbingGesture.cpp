@@ -77,6 +77,7 @@ FString UGrabbingGesture::DoesGestureExist(UPoseableMeshComponent* hand, TArray<
 				if (j == 2) { return "PalmOpen"; }
 				if (j == 3) { return "PalmClosed"; }
 				if (j == 4) { return "Rock On"; }
+				if (j == 5) { return "Menu";}
 			}
 		}
 
@@ -89,25 +90,52 @@ FString UGrabbingGesture::DoesGestureExist(UPoseableMeshComponent* hand, TArray<
 	return result;
 }
 
-FString UGrabbingGesture::DoActionOrNot(FString Gesture, bool& IsPoint, bool& IsPalmOpen)
+FString UGrabbingGesture::DoActionOrNot(FString Gesture, bool& IsPointLeft, bool& IsPalmOpenLeft, bool& IsPointRight, bool& IsPalmOpenRight, bool leftHand, bool rightHand)
 {
 
 	FString result = Gesture;
 
-	if (IsPoint == true && Gesture == "Shoot") {
-		IsPoint = false;
+	if(leftHand == true){
+
+	if (IsPointLeft == true && Gesture == "Shoot") {
+		IsPointLeft = false;
 		return "Teleport";
 	}
 
-	if (IsPalmOpen == true && Gesture == "PalmClosed") {
+	if (IsPalmOpenLeft == true && Gesture == "PalmClosed") {
 		return ("Grab");
 	}
 
-	if (Gesture == "Point") { IsPoint = true; }
-	else { IsPoint = false; }
+	if (Gesture == "Point") { IsPointLeft = true; }
+	else { IsPointLeft = false; }
 
-	if (Gesture == "PalmOpen") { IsPalmOpen = true; }
-	else { IsPalmOpen = false; }
+	if (Gesture == "PalmOpen") { IsPalmOpenLeft = true; }
+	else { IsPalmOpenLeft = false; }
+
+	return result;
+	}
+
+	if (rightHand == true) {
+
+		if (IsPointRight == true && Gesture == "Shoot") {
+			IsPointRight = false;
+			return "Teleport";
+		}
+
+		if (IsPalmOpenRight == true && Gesture == "PalmClosed") {
+			IsPalmOpenRight = false;
+			return ("Grab");
+
+		}
+
+		if (Gesture == "Point") { IsPointRight = true; }
+		else { IsPointRight = false; }
+
+		if (Gesture == "PalmOpen") { IsPalmOpenRight = true; }
+		else { IsPalmOpenRight = false; }
+
+		return result;
+	}
 
 	return result;
 }
